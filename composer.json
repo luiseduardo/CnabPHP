@@ -16,7 +16,7 @@
         {
             "name": "Luis Eduardo",
             "email": "luis.eduardo@gmail.com"
-        },
+        }
     ],
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
