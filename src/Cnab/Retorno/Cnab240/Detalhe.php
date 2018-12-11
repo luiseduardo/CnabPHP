@@ -172,6 +172,21 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     }
 
     /**
+     * Retorna os dados de uso da empresa
+     *
+     * @return string
+     */
+    public function getUsoEmpresa()
+    {
+        $uso_empresa = $this->segmento_t->uso_empresa;
+        if (trim($uso_empresa, '0') == '') {
+            return;
+        }
+
+        return $uso_empresa;
+    }
+    
+    /**
      * Retorna o nosso número do boleto.
      *
      * @return string
