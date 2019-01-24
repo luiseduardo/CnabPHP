@@ -195,14 +195,6 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     {
         $nossoNumero = $this->segmento_t->nosso_numero;
 
-        if ($this->codigo_banco == 1) {
-            $nossoNumero = preg_replace(
-                '/^'.strval($this->arquivo->getCodigoConvenio()).'/',
-                '',
-                $nossoNumero
-            );
-        }
-
         if (in_array($this->codigo_banco, array(\Cnab\Banco::SANTANDER))) {
             // retira o dv
             $nossoNumero = substr($nossoNumero, 0, -1);
