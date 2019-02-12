@@ -257,6 +257,15 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     }
 
     /**
+     * Retorna o codigo de identificação da rejeicao, este código complementa o campo codigo_movimento
+     *
+     * @return string
+     */
+    public function getIdentificacaoRejeicao() {
+        return $this->segmento_t->identificacao_rejeicao;
+    }
+
+    /**
      * Retorna o número da carteira do boleto.
      *
      * @return string
