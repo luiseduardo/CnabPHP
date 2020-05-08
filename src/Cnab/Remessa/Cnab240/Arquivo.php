@@ -248,6 +248,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
         if (!empty($boleto['dias_iniciar_contagem_juros']) && is_numeric($boleto['dias_iniciar_contagem_juros'])) {
             $dateJurosMora->modify("+{$boleto['dias_iniciar_contagem_juros']} days");
+        } else if((int) $boleto['codigo_juros_mora'] == 3) {
+            $dateJurosMora = '00000000';
         } else {
             $dateJurosMora->modify('+1 day');
         }
@@ -302,6 +304,9 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->segmento_p->identificacao_distribuicao = $boleto['identificacao_distribuicao'];
         }
 
+        $detalhe->segmento_p->codigo_ocorrencia = $boleto['codigo_ocorrencia'];
+
+        /*
         if ($tipo == 'remessa') {
             $detalhe->segmento_p->codigo_ocorrencia = 1;
         } elseif ($tipo == 'baixa') {
@@ -309,6 +314,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         } else {
             throw new \Exception('Tipo de detalhe inválido: '.$tipo);
         }
+        */
 
         // SEGMENTO Q -------------------------------
         $detalhe->segmento_q->codigo_banco = $this->headerArquivo->codigo_banco;
@@ -334,6 +340,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_q->sacador_nome = $this->headerArquivo->nome_empresa;
 
         // SEGMENTO R -------------------------------
+        $detalhe->segmento_r->mensagem_3 = $boleto['mensagem_3'];
         $detalhe->segmento_r->codigo_banco = $detalhe->segmento_p->codigo_banco;
         $detalhe->segmento_r->lote_servico = $detalhe->segmento_p->lote_servico;
         $detalhe->segmento_r->codigo_ocorrencia = $detalhe->segmento_p->codigo_ocorrencia;
